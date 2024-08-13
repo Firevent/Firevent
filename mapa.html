@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Incendios en Bucaramanga</title>
+    <!-- Vincula el archivo CSS -->
+    <style>
+        /* Estilos para el mapa */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <!-- Carga la API de Google Maps con tu API Key -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrAql0RreSi4ly0fwKkzuyWG20BA19jqU&callback=initMap" async defer></script>
+</head>
+<body>
+    <!-- Contenedor del mapa -->
+    <div id="map"></div>
+    <!-- Script para inicializar el mapa -->
+    <script>
+        function initMap() {
+            // Coordenadas de Bucaramanga, Colombia
+            const bucaramanga = { lat: 7.1254, lng: -73.1198 };
+
+            // Crea el mapa
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 12,
+                center: bucaramanga,
+            });
+
+            // Ubicaciones de incendios con enlaces a más información
+            const incendios = [
+                { lat: 7.145191228276888, lng: -73.13661602193747, title: "Incendio cerca del CAI de la Virgen", url: "https://www.eltiempo.com/colombia/otras-ciudades/incendio-forestal-en-santander-fotos-de-la-emergencia-en-condominios-en-ruitoque-846761" },
+                { lat: 7.104775554383153, lng: -73.12928856226276, title: "Incendio en Samanes 6", url: "https://x.com/EmergenciasEc/status/1801395611616280904" },
+                { lat: 7.145246031118655, lng: -73.13649871567694, title: "Incendio en la curva de la Virgen", url: "https://www.eltiempo.com/colombia/santander/incendios-en-bucaramanga-alerta-por-varias-conflagraciones-resigtradas-casi-a-la-vez-845380" }
+            ];
+
+            // Agrega un marcador en cada ubicación de incendio
+            incendios.forEach((incendio) => {
+                const marker = new google.maps.Marker({
+                    position: { lat: incendio.lat, lng: incendio.lng },
+                    map: map,
+                    title: incendio.title,
+                });
+
+                // Agrega un evento de clic para abrir el enlace
+                marker.addListener("click", () => {
+                    window.open(incendio.url, "_blank");
+                });
+            });
+        }
+    </script>
+</body>
+</html>
+
