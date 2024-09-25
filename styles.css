@@ -108,40 +108,42 @@ body, html {
 
 /* Estilos específicos para el historial */
 table {
-    width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
-    margin: 20px auto;
+    width: 100%;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
-    font-size: 14px; /* Ajusta el tamaño de fuente */
+    border-bottom: 1px solid #ddd;
+    background-color: #ffffff; /* Fondo blanco para todas las celdas */
 }
 
 th {
+    background-color: #f2f2f2; /* Fondo gris claro para la cabecera */
+}
+
+a {
+    color: #007BFF; /* Color azul para los enlaces */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; /* Subrayar al pasar el ratón */
+}
+
+.menu-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
     background-color: #007BFF;
     color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+.menu-button:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el ratón */
 }
-
-/* Media queries para ajustar el diseño en pantallas pequeñas */
-@media (max-width: 600px) {
-    .app-logo {
-        width: 100px; /* Ajusta el tamaño del logo para pantallas pequeñas */
-    }
-
-    .menu-button {
-        font-size: 14px; /* Ajusta el tamaño del texto de los botones */
-        padding: 8px 16px; /* Ajusta el padding de los botones */
-    }
-
-    table {
-        font-size: 12px; /* Ajusta el tamaño de fuente en la tabla */
-    }
-}
-
