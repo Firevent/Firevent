@@ -131,7 +131,7 @@ th, td {
 }
 
 th {
-    background-color: #f2f2f2; /* Fondo gris claro para la cabecera */
+    background-color: #ff6200; /* Fondo gris claro para la cabecera */
     color: #333; /* Color del texto en la cabecera */
     font-weight: bold; /* Negrita para el texto de la cabecera */
 }
