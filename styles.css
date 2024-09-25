@@ -18,12 +18,13 @@ body, html {
 }
 
 /* Estilo para el título h1 */
-h1 {
-    color: #ff7300; /* Cambia este código hexadecimal por el color que prefieras */
-    font-size: 36px; /* Ajusta el tamaño de la fuente si es necesario */
-    text-align: center; /* Centra el texto */
-    margin-bottom: 20px; /* Espacio debajo del título */
+/* Estilo del título */
+.title {
+    color: #007BFF; /* Cambia este valor al color que prefieras */
+    font-size: 24px; /* Ajusta el tamaño de fuente si es necesario */
+    margin: 10px 0; /* Margen superior e inferior */
 }
+
 
 
 .background-image {
