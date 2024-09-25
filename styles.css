@@ -30,7 +30,7 @@ body, html {
     align-items: center;
     justify-content: center;
     height: 100vh; /* Ocupa toda la altura de la ventana */
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
+    /* Elimina el fondo blanco con transparencia */
     padding: 20px;
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra */
@@ -55,9 +55,6 @@ body, html {
     display: block;
     text-align: center;
 }
-
-/* Otros estilos para botones según sea necesario... */
-
 
 /* Botón para el mapa de incendios (azul) */
 .menu-button.map-button {
@@ -87,6 +84,16 @@ body, html {
 
 .menu-button.history-button:hover {
     background-color: #218838;
+}
+
+/* Botón de volver (gris) */
+.menu-button.back-button {
+    background-color: #6c757d; /* Gris para el botón de volver */
+    color: white;
+}
+
+.menu-button.back-button:hover {
+    background-color: #5a6268;
 }
 
 /* Estilos específicos para el historial */
