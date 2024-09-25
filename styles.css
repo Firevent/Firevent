@@ -17,6 +17,15 @@ body, html {
     z-index: -1; /* Coloca el fondo detrás de otros elementos */
 }
 
+/* Estilo para el título h1 */
+h1 {
+    color: #ff7300; /* Cambia este código hexadecimal por el color que prefieras */
+    font-size: 36px; /* Ajusta el tamaño de la fuente si es necesario */
+    text-align: center; /* Centra el texto */
+    margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+
 .background-image {
     width: 100%;
     height: 100%;
