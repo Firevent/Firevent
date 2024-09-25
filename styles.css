@@ -4,8 +4,11 @@ body, html {
     padding: 0;
     width: 100%;
     height: 100%;
-    font-family: 'Roboto', sans-serif; /* Cambia la fuente para un estilo más moderno */
-    background-color: #f0f0f0; /* Color de fondo suave */
+    font-family: Arial, sans-serif;
+    background-image: url('fondo.png'); /* Agregar fondo */
+    background-size: cover; /* Asegura que la imagen cubra toda la pantalla */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    background-position: center; /* Centra la imagen de fondo */
 }
 
 /* Estilo del contenedor del menú */
@@ -15,34 +18,34 @@ body, html {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    background-color: #ffffff; /* Fondo blanco para contraste */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco con transparencia */
     padding: 20px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra para profundidad */
-    border-radius: 10px; /* Bordes redondeados */
+    border-radius: 10px; /* Bordes redondeados para un look moderno */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra para destacar el contenedor */
 }
 
 /* Estilo del logo */
 .app-logo {
     width: 120px; /* Ajusta el tamaño para móviles */
     height: auto;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 /* Estilo de los botones del menú */
 .menu-button {
     padding: 12px 20px; /* Ajusta el padding para un tamaño adecuado */
     font-size: 16px; /* Tamaño de fuente */
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: auto; /* Ajusta el ancho automático para evitar el estiramiento completo */
     display: block;
     text-align: center;
-    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+    transition: background-color 0.3s, transform 0.3s; /* Agrega animación suave */
 }
 
-/* Estilos de los botones */
+/* Botón para el mapa de incendios (azul) */
 .menu-button.map-button {
     background-color: #007BFF;
     color: white;
@@ -50,9 +53,10 @@ body, html {
 
 .menu-button.map-button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px); /* Efecto de elevación al pasar el mouse */
+    transform: scale(1.05); /* Efecto de escalado al pasar el mouse */
 }
 
+/* Botón para contactar emergencias (rojo) */
 .menu-button.emergency-button {
     background-color: #DC3545; /* Rojo para emergencias */
     color: white;
@@ -60,9 +64,10 @@ body, html {
 
 .menu-button.emergency-button:hover {
     background-color: #C82333;
-    transform: translateY(-2px);
+    transform: scale(1.05);
 }
 
+/* Botón para historial de incendios (verde) */
 .menu-button.history-button {
     background-color: #28A745; /* Verde para historial */
     color: white;
@@ -70,7 +75,7 @@ body, html {
 
 .menu-button.history-button:hover {
     background-color: #218838;
-    transform: translateY(-2px);
+    transform: scale(1.05);
 }
 
 /* Botón de volver (gris) */
@@ -81,7 +86,7 @@ body, html {
 
 .menu-button.back-button:hover {
     background-color: #5a6268;
-    transform: translateY(-2px);
+    transform: scale(1.05);
 }
 
 /* Estilos específicos para el historial */
@@ -93,7 +98,7 @@ table {
 
 th, td {
     border: 1px solid #ddd;
-    padding: 10px; /* Aumenta el padding para una mejor legibilidad */
+    padding: 8px;
     text-align: left;
     font-size: 14px; /* Ajusta el tamaño de fuente */
 }
@@ -104,14 +109,7 @@ th {
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2; /* Alterna colores de filas */
-}
-
-/* Estilo de fondo para páginas (excepto mapa y contactar emergencias) */
-body:not(.map-page):not(.emergency-page) {
-    background-image: url('fondo.png'); /* Fondo de la página */
-    background-size: cover; /* Cubre todo el fondo */
-    background-position: center; /* Centra la imagen */
+    background-color: #f2f2f2;
 }
 
 /* Media queries para ajustar el diseño en pantallas pequeñas */
