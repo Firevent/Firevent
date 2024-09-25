@@ -68,32 +68,32 @@ body, html {
 
 /* Botón para el mapa de incendios (azul) */
 .menu-button.map-button {
-    background-color: #007BFF;
+    background-color: #009419;
     color: white;
 }
 
 .menu-button.map-button:hover {
-    background-color: #0056b3;
+    background-color: #009419;
 }
 
 /* Botón para contactar emergencias (rojo) */
 .menu-button.emergency-button {
-    background-color: #DC3545; /* Rojo para emergencias */
+    background-color: #009419; /* Rojo para emergencias */
     color: white;
 }
 
 .menu-button.emergency-button:hover {
-    background-color: #C82333;
+    background-color: #009419;
 }
 
 /* Botón para historial de incendios (verde) */
 .menu-button.history-button {
-    background-color: #28A745; /* Verde para historial */
+    background-color: #009419; /* Verde para historial */
     color: white;
 }
 
 .menu-button.history-button:hover {
-    background-color: #218838;
+    background-color: #009419;
 }
 
 /* Botón de volver (gris) */
