@@ -107,21 +107,41 @@ body, html {
 }
 
 /* Estilos específicos para el historial */
+.history-container {
+    margin-top: 20px; /* Espacio superior */
+    max-width: 800px; /* Ancho máximo de la tabla */
+    margin-left: auto; /* Centrar horizontalmente */
+    margin-right: auto; /* Centrar horizontalmente */
+    background-color: #ffffff; /* Fondo blanco para el contenedor */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra */
+    overflow: hidden; /* Evitar desbordamiento */
+}
+
+/* Tabla de historial */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
 }
 
 th, td {
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    background-color: #ffffff; /* Fondo blanco para todas las celdas */
 }
 
 th {
     background-color: #f2f2f2; /* Fondo gris claro para la cabecera */
+    color: #333; /* Color del texto en la cabecera */
+    font-weight: bold; /* Negrita para el texto de la cabecera */
+}
+
+td {
+    background-color: #ffffff; /* Fondo blanco para las celdas */
+}
+
+tr:hover td {
+    background-color: #f9f9f9; /* Color de fondo al pasar el ratón sobre la fila */
 }
 
 a {
@@ -132,7 +152,6 @@ a {
 a:hover {
     text-decoration: underline; /* Subrayar al pasar el ratón */
 }
-
 .menu-button {
     display: block;
     margin: 20px auto;
