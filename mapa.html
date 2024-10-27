@@ -11,32 +11,46 @@
             padding: 0;
         }
         #map {
-            height: 100%;
+            height: 80%;
             width: 100%;
+        }
+        #connectBtn {
+            height: 20%;
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
         }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBrAql0RreSi4ly0fwKkzuyWG20BA19jqU&callback=initMap" async defer></script>
 </head>
 <body>
     <div id="map"></div>
+    <button id="connectBtn">Conectar a Bluetooth</button>
     <script>
+        let map;
+        let markers = [];
+
+        // Incendios predefinidos
+        const incendios = [
+            { lat: 7.062592718092456, lng: -73.08585660100358, title: "Incendio cerca del parque en Floridablanca", url: "https://www.facebook.com/reel/1710157999737996" },
+            { lat: 7.1147174240290605, lng: -73.10953493342652, title: "Incendio de vehículo en calle 51 con carrera 35", url: "https://www.facebook.com/BomberosBGA/posts/pfbid034CefJxtAE7ZpQ9NBVB1KZCa6LpiKF5WbQvhjSBLkWM3apUgh2NXjwFKWLTprJtCUl" },
+            { lat: 7.102148628553174, lng: -73.1134764315446, title: "Incendio vehicular en la vía Bucaramanga Girón", url: "https://www.facebook.com/BomberosBGA/posts/pfbid0H74xcHt1D2WDEFVfjSkqxwF1cjCMNXgEtD1tPQsZ1169iq8aQQkn13tiwmau9UFKl" },
+            { lat: 7.130920876281695, lng: -73.12673986226255, title: "Posible incendio en carrera 19 con calle 17", url: "https://www.facebook.com/story.php/?story_fbid=926065942899495&id=100064882922712&paipv=0&eav=AfZyfabV9jdSI3SoN1AodlGXjdGIIwgIkOK5dXIitKssRy_DcNbnp0SnOb_GBZFohrU&_rdr" },
+            { lat: 7.149977825684513, lng: -73.13331891501365, title: "Incendio en zona rural del barrio Colorados", url: "https://www.facebook.com/BomberosBGA/posts/pfbid02cq9qQDaqNnjKqjbuE3kHChG1mCGxXFV7dQjQLpe6iA8VZDUXjBfwNksKXcAtyqsyl" },
+            { lat: 7.133347152911366, lng: -73.13324424303123, title: "Tres incendios de cobertura vegetal en el norte de Bucaramanga", url: "https://www.facebook.com/BomberosBGA/posts/pfbid02ipSa9wHFRxBQPh3yhZYKvH71uc6LeY44qScYitT8p5XYMvPS6mtkgPASu1RHkzUGl" },
+        ];
+
         function initMap() {
             const bucaramanga = { lat: 7.1254, lng: -73.1198 };
-
-            const map = new google.maps.Map(document.getElementById("map"), {
+            map = new google.maps.Map(document.getElementById("map"), {
                 zoom: 12,
                 center: bucaramanga,
             });
 
-            const incendios = [
-                { lat: 7.062592718092456, lng: -73.08585660100358, title: "Incendio cerca del parque en Floridablanca", url: "https://www.facebook.com/reel/1710157999737996" },
-                { lat: 7.1147174240290605, lng: -73.10953493342652, title: "Incendio de vehículo en calle 51 con carrera 35", url: "https://www.facebook.com/BomberosBGA/posts/pfbid034CefJxtAE7ZpQ9NBVB1KZCa6LpiKF5WbQvhjSBLkWM3apUgh2NXjwFKWLTprJtCUl" },
-                { lat: 7.102148628553174, lng: -73.1134764315446, title: "Incendio vehicular en la vía Bucaramanga Girón", url: "https://www.facebook.com/BomberosBGA/posts/pfbid0H74xcHt1D2WDEFVfjSkqxwF1cjCMNXgEtD1tPQsZ1169iq8aQQkn13tiwmau9UFKl" },
-                { lat: 7.130920876281695, lng: -73.12673986226255, title: "Posible incendio en carrera 19 con calle 17", url: "https://www.facebook.com/story.php/?story_fbid=926065942899495&id=100064882922712&paipv=0&eav=AfZyfabV9jdSI3SoN1AodlGXjdGIIwgIkOK5dXIitKssRy_DcNbnp0SnOb_GBZFohrU&_rdr" },
-                { lat: 7.149977825684513, lng:  -73.13331891501365, title: "Incendio en zona rural del barrio Colorados", url: "https://www.facebook.com/BomberosBGA/posts/pfbid02cq9qQDaqNnjKqjbuE3kHChG1mCGxXFV7dQjQLpe6iA8VZDUXjBfwNksKXcAtyqsyl" },
-                { lat: 7.133347152911366, lng: -73.13324424303123, title: "Tres incendios de cobertura vegetal en el norte de Bucaramanga", url: "https://www.facebook.com/BomberosBGA/posts/pfbid02ipSa9wHFRxBQPh3yhZYKvH71uc6LeY44qScYitT8p5XYMvPS6mtkgPASu1RHkzUGl" },
-            ];
-
+            // Coloca marcadores predefinidos en el mapa
             incendios.forEach((incendio) => {
                 const marker = new google.maps.Marker({
                     position: { lat: incendio.lat, lng: incendio.lng },
@@ -47,8 +61,74 @@
                 marker.addListener("click", () => {
                     window.open(incendio.url, "_blank");
                 });
+
+                markers.push(marker);
             });
+
+            // Obtención de la ubicación del dispositivo
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const userLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                    };
+
+                    // Agregar marcador para la ubicación del usuario
+                    const userMarker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: "Tu ubicación",
+                    });
+
+                    map.setCenter(userLocation); // Centra el mapa en la ubicación del usuario
+                });
+            } else {
+                alert("Geolocalización no es soportada por este navegador.");
+            }
+        }
+
+        document.getElementById('connectBtn').addEventListener('click', async () => {
+            try {
+                // Solicitar acceso al Bluetooth
+                const device = await navigator.bluetooth.requestDevice({
+                    filters: [{ name: 'HC-05' }], // Cambia el nombre según sea necesario
+                    optionalServices: ['battery_service'] // Agrega servicios adicionales si es necesario
+                });
+                
+                const server = await device.gatt.connect();
+                const service = await server.getPrimaryService('battery_service'); // Cambia a tu servicio
+                const characteristic = await service.getCharacteristic('battery_level'); // Cambia a tu característica
+
+                // Leer el valor del umbral
+                const reading = await characteristic.readValue();
+                const umbral = reading.getUint8(0); // Ajusta según el tipo de datos
+
+                // Llamar a la función para actualizar el mapa
+                updateMap(device, umbral);
+
+            } catch (error) {
+                console.error('Error al conectar con el dispositivo Bluetooth:', error);
+            }
+        });
+
+        function updateMap(device, umbral) {
+            const location = { lat: 7.1254, lng: -73.1198 }; // Actualiza con la ubicación real
+
+            // Crear un marcador con la información del umbral
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: `Nivel de gas: ${umbral}`,
+            });
+
+            markers.push(marker);
+
+            // Eliminar el marcador después de 2 minutos (120000 ms)
+            setTimeout(() => {
+                marker.setMap(null); // Borra el marcador del mapa
+            }, 120000); // 2 minutos en milisegundos
         }
     </script>
 </body>
 </html>
+
