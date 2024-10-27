@@ -56,13 +56,9 @@ body, html {
     padding: 0 20px; /* Espaciado a los lados */
 }
 
-/* Ajustar tamaño y estilo de los botones de ícono */
 .icon-button {
-    background-color: transparent; /* Asegúrate de que el fondo sea transparente */
-    border: none;
-    cursor: pointer;
-    padding: 0; /* Elimina el padding para evitar márgenes */
-    margin: 0; /* Elimina el margen para que no haya espacio adicional */
+    border: 1px solid transparent; /* Borde transparente */
+    padding: 0; /* Asegúrate de que el padding sea 0 */
 }
 
 .icon-button:hover .icon {
