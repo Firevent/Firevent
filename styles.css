@@ -46,17 +46,22 @@ body, html {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra */
 }
 /* Estilos para los botones de ícono */
+/* Estilo para el contenedor de los botones de ícono */
+.icon-buttons-container {
+    position: fixed; /* Fijo para que estén en la parte inferior */
+    bottom: 20px; /* Espacio desde el fondo */
+    width: 100%; /* Ocupar todo el ancho */
+    display: flex; /* Usar flexbox para alinear los botones */
+    justify-content: space-between; /* Distribuir espacio entre los botones */
+    padding: 0 20px; /* Espaciado a los lados */
+}
+
+/* Ajustar tamaño y estilo de los botones de ícono */
 .icon-button {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    padding: 10px;
-    margin: 10px;
-}
-
-.icon-button .icon {
-    width: 50px; /* Ajusta el tamaño del ícono según necesites */
-    height: auto;
+    padding: 5px; /* Reduce el padding para que sean más pequeños */
 }
 
 .icon-button:hover .icon {
