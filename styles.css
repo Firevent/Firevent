@@ -45,7 +45,6 @@ body, html {
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra */
 }
-/* Estilos para los botones de ícono */
 /* Estilo para el contenedor de los botones de ícono */
 .icon-buttons-container {
     position: fixed; /* Fijo para que estén en la parte inferior */
@@ -56,21 +55,17 @@ body, html {
     padding: 0 20px; /* Espaciado a los lados */
 }
 
+/* Ajustar tamaño y estilo de los botones de ícono */
 .icon-button {
-    background-color: transparent; /* Fondo transparente */
-    border: none; /* Sin borde */
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-    padding: 0; /* Sin padding */
-    margin: 0; /* Sin margen */
+    padding: 5px; /* Reduce el padding para que sean más pequeños */
 }
 
 .icon-button .icon {
-    width: 40px; /* Tamaño del ícono */
-    height: auto; /* Altura automática para mantener la relación de aspecto */
-}
-
-.icon-button:hover .icon {
-    opacity: 0.8; /* Efecto de opacidad al pasar el cursor */
+    width: 40px; /* Ajusta el tamaño del ícono */
+    height: auto;
 }
 /* Estilo del logo */
 .app-logo {
