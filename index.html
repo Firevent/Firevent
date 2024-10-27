@@ -18,16 +18,19 @@
         <button class="menu-button map-button" onclick="openMap()">Ir al Mapa de Incendios</button>
         <button class="menu-button history-button" onclick="viewHistory()">Ver Historial de Incendios</button>
 
-        <!-- Botón de Llamada con ícono -->
-        <button class="icon-button" onclick="contactEmergency()">
-            <img src="Llamada.png" alt="Llamar Emergencias" class="icon">
-        </button>
+<!-- Botones de Llamada y Bluetooth -->
+<div class="icon-buttons-container">
+    <!-- Botón de Llamada con ícono -->
+    <button class="icon-button" onclick="contactEmergency()">
+        <img src="Llamada.png" alt="Llamar Emergencias" class="icon">
+    </button>
 
-        <!-- Botón de Bluetooth con ícono -->
-        <button class="icon-button" onclick="connectBluetooth()">
-            <img src="Bluetooth.png" alt="Conectar Bluetooth" class="icon">
-        </button>
-    </div>
+    <!-- Botón de Bluetooth con ícono -->
+    <button class="icon-button" onclick="connectBluetooth()">
+        <img src="Bluetooth.png" alt="Conectar Bluetooth" class="icon">
+    </button>
+</div>
+
 
     <script>
         function openMap() {
