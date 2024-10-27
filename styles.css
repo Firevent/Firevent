@@ -58,10 +58,11 @@ body, html {
 
 /* Ajustar tamaño y estilo de los botones de ícono */
 .icon-button {
-    background-color: transparent;
+    background-color: transparent; /* Asegúrate de que el fondo sea transparente */
     border: none;
     cursor: pointer;
-    padding: 5px; /* Reduce el padding para que sean más pequeños */
+    padding: 0; /* Elimina el padding para evitar márgenes */
+    margin: 0; /* Elimina el margen para que no haya espacio adicional */
 }
 
 .icon-button:hover .icon {
