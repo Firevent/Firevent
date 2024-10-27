@@ -57,8 +57,16 @@ body, html {
 }
 
 .icon-button {
-    border: 1px solid transparent; /* Borde transparente */
-    padding: 0; /* Asegúrate de que el padding sea 0 */
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    cursor: pointer;
+    padding: 0; /* Sin padding */
+    margin: 0; /* Sin margen */
+}
+
+.icon-button .icon {
+    width: 40px; /* Tamaño del ícono */
+    height: auto; /* Altura automática para mantener la relación de aspecto */
 }
 
 .icon-button:hover .icon {
