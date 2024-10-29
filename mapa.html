@@ -55,6 +55,31 @@
                 });
             });
 
+            // Obtener la ubicación del usuario desde localStorage
+            const userLocation = JSON.parse(localStorage.getItem('userLocation'));
+            const markerDuration = localStorage.getItem('markerDuration');
+
+            if (userLocation && markerDuration) {
+                const now = Date.now();
+                const oneMinute = 60 * 1000; // 1 minuto en milisegundos
+
+                // Colocar el marcador solo si es reciente (dentro de un minuto)
+                if (now - markerDuration < oneMinute) {
+                    const marker = new google.maps.Marker({
+                        position: userLocation,
+                        map: map,
+                        title: "Tu ubicación actual",
+                    });
+
+                    // Eliminar el marcador después de 1 minuto (60000 ms)
+                    setTimeout(() => {
+                        marker.setMap(null); // Borra el marcador del mapa
+                        localStorage.removeItem('userLocation'); // Limpia localStorage
+                        localStorage.removeItem('markerDuration');
+                    }, 60000); // 1 minuto en milisegundos
+                }
+            }
+
             // Obtener la ubicación del dispositivo
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
@@ -63,6 +88,10 @@
                         lng: position.coords.longitude,
                     };
                     map.setCenter(userLocation); // Centra el mapa en la ubicación del usuario
+
+                    // Guardar la ubicación del usuario en localStorage
+                    localStorage.setItem('userLocation', JSON.stringify(userLocation));
+                    localStorage.setItem('markerDuration', Date.now());
                 }, () => {
                     handleLocationError(true, map.getCenter());
                 });
