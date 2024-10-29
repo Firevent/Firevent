@@ -36,33 +36,51 @@
     </div>
 
     <script>
-        function openMap() {
-            window.location.href = "mapa.html";
-        }
+    function openMap() {
+        window.location.href = "mapa.html";
+    }
 
-        function contactEmergency() {
-            window.location.href = "tel:123";
-        }
+    function contactEmergency() {
+        window.location.href = "tel:123";
+    }
 
-        function viewHistory() {
-            window.location.href = "historial.html";
-        }
+    function viewHistory() {
+        window.location.href = "historial.html";
+    }
 
-        function connectBluetooth() {
-            if (navigator.bluetooth) {
-                navigator.bluetooth.requestDevice({ acceptAllDevices: true })
-                    .then(device => console.log("Dispositivo conectado:", device))
-                    .catch(error => console.log("Error al conectar:", error));
-            } else {
-                alert("Bluetooth no compatible en este dispositivo.");
-            }
+    function connectBluetooth() {
+        if (navigator.bluetooth) {
+            navigator.bluetooth.requestDevice({ acceptAllDevices: true })
+                .then(device => console.log("Dispositivo conectado:", device))
+                .catch(error => console.log("Error al conectar:", error));
+        } else {
+            alert("Bluetooth no compatible en este dispositivo.");
         }
+    }
 
-        function activateLocation() {
-            // Aquí puedes agregar la función para activar la geolocalización
-            console.log("Geolocalización activada"); // Placeholder
+    function activateLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const userLocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                // Guardar la ubicación en localStorage
+                localStorage.setItem('userLocation', JSON.stringify(userLocation));
+                localStorage.setItem('markerDuration', Date.now()); // Timestamp de inicio
+
+                // Redirigir al mapa
+                openMap();
+            }, (error) => {
+                console.error("Error al obtener la ubicación:", error);
+                alert("No se pudo obtener la ubicación. Asegúrate de que los servicios de ubicación están habilitados.");
+            });
+        } else {
+            alert("Tu navegador no soporta la geolocalización.");
         }
-    </script>
+    }
+</script>
 </body>
 </html>
 
