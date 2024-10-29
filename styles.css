@@ -86,7 +86,18 @@ body, html {
     display: block;
     text-align: center;
 }
-
+/* Botón invisible en la esquina superior derecha */
+.invisible-button {
+    position: fixed;
+    top: 20px; /* Ajusta la posición vertical */
+    right: 20px; /* Ajusta la posición horizontal */
+    width: 100px; /* Ancho del botón */
+    height: 50px; /* Alto del botón */
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor de puntero para indicar que es clickeable */
+    z-index: 10; /* Asegúrate de que esté en la parte superior */
+}
 /* Botón para el mapa de incendios (azul) */
 .menu-button.map-button {
     background-color: #009419;
