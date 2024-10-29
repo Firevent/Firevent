@@ -22,6 +22,7 @@
     <script>
         let map;
         const markers = [];
+        const infoWindow = new google.maps.InfoWindow(); // Crear un InfoWindow
 
         function initMap() {
             const bucaramanga = { lat: 7.1254, lng: -73.1198 };
@@ -61,22 +62,25 @@
 
             if (userLocation && markerDuration) {
                 const now = Date.now();
-                const oneMinute = 60 * 1000; // 1 minuto en milisegundos
+                const thirtySeconds = 30 * 1000; // 30 segundos en milisegundos
 
-                // Colocar el marcador solo si es reciente (dentro de un minuto)
-                if (now - markerDuration < oneMinute) {
+                // Colocar el marcador solo si es reciente (dentro de 30 segundos)
+                if (now - markerDuration < thirtySeconds) {
                     const marker = new google.maps.Marker({
                         position: userLocation,
                         map: map,
                         title: "Tu ubicación actual",
                     });
 
-                    // Eliminar el marcador después de 1 minuto (60000 ms)
+                    // Eliminar el marcador después de 30 segundos (30000 ms)
                     setTimeout(() => {
                         marker.setMap(null); // Borra el marcador del mapa
                         localStorage.removeItem('userLocation'); // Limpia localStorage
                         localStorage.removeItem('markerDuration');
-                    }, 60000); // 1 minuto en milisegundos
+                    }, thirtySeconds); // 30 segundos en milisegundos
+
+                    // Agregar un listener para mostrar información del gas
+                    showGasInfo(marker);
                 }
             }
 
@@ -88,15 +92,10 @@
                         lng: position.coords.longitude,
                     };
                     map.setCenter(userLocation); // Centra el mapa en la ubicación del usuario
-
-                    // Guardar la ubicación del usuario en localStorage
-                    localStorage.setItem('userLocation', JSON.stringify(userLocation));
-                    localStorage.setItem('markerDuration', Date.now());
                 }, () => {
                     handleLocationError(true, map.getCenter());
                 });
             } else {
-                // Si el navegador no soporta la geolocalización
                 handleLocationError(false, map.getCenter());
             }
         }
@@ -107,6 +106,23 @@
                 'Error: Tu navegador no soporta geolocalización.';
             alert(message);
             map.setCenter(pos);
+        }
+
+        // Función para mostrar información del gas
+        function showGasInfo(marker) {
+            const tipoGas = "Butano"; // Gas emitido por el mechero
+            const umbral = Math.floor(Math.random() * (700 - 400 + 1)) + 400; // Umbral aleatorio entre 400 y 700
+
+            // Agregar un listener para mostrar información del gas
+            marker.addListener("mouseover", () => {
+                infoWindow.setContent(`${tipoGas}<br>Umbral: ${umbral}`);
+                infoWindow.open(map, marker);
+            });
+
+            // Cerrar el InfoWindow cuando el mouse salga
+            marker.addListener("mouseout", () => {
+                infoWindow.close();
+            });
         }
 
         // Función para agregar un marcador con el umbral y la ubicación
@@ -127,14 +143,16 @@
 
                     markers.push(marker);
 
-                    // Eliminar el marcador después de 2 minutos (120000 ms)
+                    // Mostrar información del gas para el nuevo marcador
+                    showGasInfo(marker);
+
+                    // Eliminar el marcador después de 30 segundos (30000 ms)
                     setTimeout(() => {
                         marker.setMap(null); // Borra el marcador del mapa
-                    }, 120000); // 2 minutos en milisegundos
+                    }, 30000); // 30 segundos en milisegundos
                 });
             }
         }
     </script>
 </body>
 </html>
-
