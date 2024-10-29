@@ -66,21 +66,32 @@
 
                 // Colocar el marcador solo si es reciente (dentro de 30 segundos)
                 if (now - markerDuration < thirtySeconds) {
+                    // Crear un marcador con la información del incendio
+                    const umbral = Math.floor(Math.random() * (700 - 400 + 1)) + 400; // Umbral aleatorio entre 400 y 700
                     const marker = new google.maps.Marker({
                         position: userLocation,
                         map: map,
-                        title: "Tu ubicación actual",
+                        title: "Incendio detectado",
                     });
+
+                    // Contenido del InfoWindow
+                    const infoContent = `
+                        <strong>Incendio detectado</strong><br>
+                        Tipo de gas: Butano<br>
+                        Umbral: ${umbral}
+                    `;
+
+                    // Mostrar el InfoWindow con la información del incendio
+                    infoWindow.setContent(infoContent);
+                    infoWindow.open(map, marker);
 
                     // Eliminar el marcador después de 30 segundos (30000 ms)
                     setTimeout(() => {
                         marker.setMap(null); // Borra el marcador del mapa
+                        infoWindow.close(); // Cierra el InfoWindow
                         localStorage.removeItem('userLocation'); // Limpia localStorage
                         localStorage.removeItem('markerDuration');
                     }, thirtySeconds); // 30 segundos en milisegundos
-
-                    // Agregar un listener para mostrar información del gas
-                    showGasInfo(marker);
                 }
             }
 
@@ -106,52 +117,6 @@
                 'Error: Tu navegador no soporta geolocalización.';
             alert(message);
             map.setCenter(pos);
-        }
-
-        // Función para mostrar información del gas
-        function showGasInfo(marker) {
-            const tipoGas = "Butano"; // Gas emitido por el mechero
-            const umbral = Math.floor(Math.random() * (700 - 400 + 1)) + 400; // Umbral aleatorio entre 400 y 700
-
-            // Agregar un listener para mostrar información del gas
-            marker.addListener("mouseover", () => {
-                infoWindow.setContent(`${tipoGas}<br>Umbral: ${umbral}`);
-                infoWindow.open(map, marker);
-            });
-
-            // Cerrar el InfoWindow cuando el mouse salga
-            marker.addListener("mouseout", () => {
-                infoWindow.close();
-            });
-        }
-
-        // Función para agregar un marcador con el umbral y la ubicación
-        function updateMap(umbral) {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    const userLocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                    };
-
-                    // Crear un marcador con la información del umbral
-                    const marker = new google.maps.Marker({
-                        position: userLocation,
-                        map: map,
-                        title: `Nivel de gas: ${umbral}`,
-                    });
-
-                    markers.push(marker);
-
-                    // Mostrar información del gas para el nuevo marcador
-                    showGasInfo(marker);
-
-                    // Eliminar el marcador después de 30 segundos (30000 ms)
-                    setTimeout(() => {
-                        marker.setMap(null); // Borra el marcador del mapa
-                    }, 30000); // 30 segundos en milisegundos
-                });
-            }
         }
     </script>
 </body>
