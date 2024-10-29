@@ -78,8 +78,10 @@
                     const infoContent = `Incendio detectado / Tipo de gas: Butano / Umbral: ${umbral}`;
 
                     // Mostrar el InfoWindow con la información del incendio
-                    infoWindow.setContent(infoContent);
-                    infoWindow.open(map, marker);
+                    google.maps.event.addListener(marker, "click", () => {
+                        infoWindow.setContent(infoContent);
+                        infoWindow.open(map, marker);
+                    });
 
                     // Eliminar el marcador después de 30 segundos (30000 ms)
                     setTimeout(() => {
@@ -117,3 +119,4 @@
     </script>
 </body>
 </html>
+
