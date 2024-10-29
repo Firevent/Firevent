@@ -71,14 +71,12 @@
                     const marker = new google.maps.Marker({
                         position: userLocation,
                         map: map,
-                        title: `Incendio detectado / Tipo de gas: Butano / Umbral: ${umbral}`,
+                        title: `Incendio detectado / Tipo de gas: Butano / Umbral: ${umbral}`, // Cambiado para incluir la información
                     });
-
-                    // Contenido del InfoWindow
-                    const infoContent = `Incendio detectado / Tipo de gas: Butano / Umbral: ${umbral}`,
 
                     // Mostrar el InfoWindow con la información del incendio
                     google.maps.event.addListener(marker, "click", () => {
+                        const infoContent = `Incendio detectado / Tipo de gas: Butano / Umbral: ${umbral}`;
                         infoWindow.setContent(infoContent);
                         infoWindow.open(map, marker);
                     });
@@ -119,4 +117,3 @@
     </script>
 </body>
 </html>
-
